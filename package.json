@@ -1,0 +1,8 @@
+{
+  "name": "ciasom-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joe Noon <joenoon@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
