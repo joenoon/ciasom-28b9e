@@ -1,16 +1,31 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
+  "name": "ciasom-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joe Noon <joenoon@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "6.x"
+  },
   "scripts": {
-    "serve": "firebase serve --only functions",
+    "dev": "PORT=8080 nodemon --exec node -- ./server.js",
+    "serve": "firebase serve --only functions,hosting",
     "shell": "firebase experimental:functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only functions,hosting",
     "logs": "firebase functions:log"
   },
-  "dependencies": {
-    "firebase-admin": "~5.8.1",
-    "firebase-functions": "^0.8.1"
+  "devDependencies": {
+    "firebase-tools": "^3.17.4",
+    "nodemon": "^1.14.11"
   },
-  "private": true
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "firebase-admin": "^5.8.1",
+    "firebase-functions": "^0.8.1",
+    "form-data": "^2.3.1",
+    "node-fetch": "^1.7.3"
+  }
 }

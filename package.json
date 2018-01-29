@@ -1,11 +1,21 @@
 {
-  "name": "ciasom-app",
+  "name": "ciasom-app-root",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Joe Noon <joenoon@gmail.com>",
   "license": "MIT",
   "private": true,
+  "lint-staged": {
+    "*.{js,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
   "devDependencies": {
-    "firebase-tools": "^3.17.4"
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "prettier": "^1.10.2"
   }
 }
