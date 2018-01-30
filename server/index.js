@@ -6,6 +6,10 @@ const fetch = require('node-fetch');
 
 app.enable('trust proxy');
 
+app.get('/', (req, res) => {
+  res.send('Hello!');
+});
+
 // @todo: extract to a config
 const NPR_CLIENT_ID = 'nprone_trial_vNlQ3IUlacqy';
 const NPR_SECRET = 'h0cfDAS6I6unufB4yCHPrEkWCN2MsIPuy2yQty1i';
