@@ -1,6 +1,6 @@
 # Ciasom Exercise
 
-**Runs on Google/Firebase Cloud Functions - requires node 6.11.5**
+**Runs on Google App Engine**
 
 ## Server
 

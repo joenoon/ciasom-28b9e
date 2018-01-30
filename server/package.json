@@ -1,0 +1,25 @@
+{
+  "name": "ciasom-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joe Noon <joenoon@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "8.x"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "PORT=8080 nodemon --exec node -- ./index.js",
+    "deploy": "gcloud app deploy --project ciasom-28b9e"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "form-data": "^2.3.1",
+    "node-fetch": "^1.7.3"
+  }
+}

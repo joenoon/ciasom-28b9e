@@ -18,7 +18,7 @@ import {PlaylistComponent} from './Components/Playlist';
 const NPR_URL = 'https://api.npr.org';
 const NPR_ACCESS_TOKEN_KEY = 'NPR_ACCESS_TOKEN_KEY';
 const NPR_CLIENT_ID = 'nprone_trial_vNlQ3IUlacqy';
-const SERVER_URL = 'https://ciasom-28b9e.firebaseapp.com';
+const SERVER_URL = 'https://ciasom-28b9e.appspot.com';
 
 const LOADING_PAGE = 'LOADING_PAGE';
 const LOGGED_IN_PAGE = 'LOGGED_IN_PAGE';
