@@ -4,12 +4,13 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TouchableHighlight,
   StatusBar,
   ActivityIndicator,
 } from 'react-native';
 import Expo from 'expo';
 import {observer} from 'mobx-react/native';
-import {observable, runInAction} from 'mobx';
+import {observable, runInAction, toJS} from 'mobx';
 
 import {DoubleTapArea} from './Components/DoubleTapArea';
 import {PlaylistComponent} from './Components/Playlist';
@@ -31,6 +32,47 @@ const makeEmptyPlaylist = () => ({
 });
 
 StatusBar.setBarStyle('light-content');
+
+import SortableListView from 'react-native-sortable-listview';
+
+class RowComponent extends React.Component {
+  render() {
+    return (
+      <TouchableHighlight
+        underlayColor={'#eee'}
+        style={{
+          padding: 25,
+          backgroundColor: '#F8F8F8',
+          borderBottomWidth: 1,
+          borderColor: '#eee',
+        }}
+        {...this.props.sortHandlers}
+      >
+        <Text>{this.props.data.text}</Text>
+      </TouchableHighlight>
+    );
+  }
+}
+let data = {
+  hello: {text: 'world'},
+  how: {text: 'are you'},
+  test: {text: 123},
+  this: {text: 'is'},
+  a: {text: 'a'},
+  real: {text: 'real'},
+  drag: {text: 'drag and drop'},
+  bb: {text: 'bb'},
+  cc: {text: 'cc'},
+  dd: {text: 'dd'},
+  ee: {text: 'ee'},
+  ff: {text: 'ff'},
+  gg: {text: 'gg'},
+  hh: {text: 'hh'},
+  ii: {text: 'ii'},
+  jj: {text: 'jj'},
+  kk: {text: 'kk'},
+};
+const order = Object.keys(data);
 
 @observer
 export default class App extends React.Component {
@@ -200,7 +242,81 @@ export default class App extends React.Component {
     }
   };
 
+  checkScroller = () => {
+    return;
+    const {scroller} = this;
+    if (!scroller) return;
+    const {scrollValue, scrollContainerHeight, moveY, direction, dy} = scroller;
+
+    const itemHeight =
+      (scroller.state &&
+        scroller.state.active &&
+        scroller.state.active.layout &&
+        scroller.state.active.layout.frameHeight) ||
+      null;
+    const listLayoutHeight =
+      (scroller.listLayout && scroller.listLayout.height) || null;
+    if (itemHeight == null || listLayoutHeight == null) return;
+
+    // const itemHeight = this.state.active.layout.frameHeight
+
+    const diff = listLayoutHeight - itemHeight;
+    if (moveY > diff) {
+      console.log('moveTo', moveY + itemHeight);
+      scroller.scrollTo({y: moveY + itemHeight});
+    }
+
+    // const MAX_HEIGHT = Math.max(
+    //   0,
+    //   scrollContainerHeight - listLayoutHeight + itemHeight
+    // )
+    // if (scrollValue > MAX_HEIGHT) {
+    //   scroller.scrollTo({ y: MAX_HEIGHT })
+    // }
+
+    console.log('checking', {
+      scrollValue,
+      scrollContainerHeight,
+      itemHeight,
+      listLayoutHeight,
+      moveY,
+      direction,
+      dy,
+    });
+
+    // checking Object {
+    //   "direction": "down",
+    //   "dy": 201,
+    //   "itemHeight": 68,
+    //   "listLayoutHeight": 627,
+    //   "moveY": 595,
+    //   "scrollContainerHeight": 1156,
+    //   "scrollValue": 0,
+    // }
+  };
+
+  renderExperiment = () => {
+    return (
+      <View style={{flex: 1, paddingVertical: 100}}>
+        <SortableListView
+          ref={x => (this.scroller = x)}
+          style={{flex: 1}}
+          data={data}
+          order={order}
+          onRowMoved={e => {
+            order.splice(e.to, 0, order.splice(e.from, 1)[0]);
+            this.forceUpdate();
+          }}
+          disableAnimatedScrolling
+          onScroll={this.checkScroller}
+          renderRow={row => <RowComponent data={row} />}
+        />
+      </View>
+    );
+  };
+
   render() {
+    return this.renderExperiment();
     return (
       <View style={{flex: 1, backgroundColor: '#000'}}>
         {this.renderPage()}
