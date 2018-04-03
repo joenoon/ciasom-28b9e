@@ -1,6 +1,6 @@
 # Ciasom Exercise
 
-**Runs on Google App Engine**
+**Runs on Google App Engine, requires NPR api keys**
 
 ## Server
 
